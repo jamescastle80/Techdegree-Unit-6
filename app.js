@@ -57,19 +57,26 @@ function addPhraseToDisplay(phrasePick) {
 addPhraseToDisplay(phrasePick);
 
 // listen for the on screen keyboard to be clicked
-qwerty.addEventListener('click', e => {
-    console.log(e.target);
-    console.log(e.target.textContent);
-    let chosen = e.target.value;
-    return chosen;
-});
 
-
+    qwerty.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+            let chosenLetter = e.target.textContent;
+            const button = e.target;
+            button.className = 'chosen';
+            button.disabled = true;
+            console.log(chosenLetter);
+        }
+    });
+  
 
 // check if a letter is in the phrase
-
-function checkLetter() {
- 
+function checkLetter(chosenLetter) {
+    for ( let i = 0; i < phrasePick.length; i ++ ) {
+        let letter = phrasePick[i];
+        if (letter === chosenLetter) {
+            letter.className = '.show';
+        }
+    }
 }
 
 checkLetter();
