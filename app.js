@@ -56,6 +56,18 @@ function addPhraseToDisplay(phrasePick) {
 
 addPhraseToDisplay(phrasePick);
 
+// check if a letter is in the phrase function
+function checkLetter(chosenLetter) {
+    
+    let matched = null;
+    for ( let i = 0; i < phrasePick.length; i ++ ) {
+        let letter = phrasePick[i];
+        
+        if (letter === chosenLetter) {
+            letter.className = '.show';
+        }
+    }
+}
 // listen for the on screen keyboard to be clicked
 
     qwerty.addEventListener('click', (e) => {
@@ -65,19 +77,12 @@ addPhraseToDisplay(phrasePick);
             button.className = 'chosen';
             button.disabled = true;
             console.log(chosenLetter);
+            checkLetter(chosenLetter);
         }
     });
   
 
-// check if a letter is in the phrase
-function checkLetter(chosenLetter) {
-    for ( let i = 0; i < phrasePick.length; i ++ ) {
-        let letter = phrasePick[i];
-        if (letter === chosenLetter) {
-            letter.className = '.show';
-        }
-    }
-}
+
 
 checkLetter();
 
