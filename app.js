@@ -8,6 +8,7 @@ let chosen = '';
 let scoreboard = document.getElementById('scoreboard');
 let hearts = document.querySelector('.tries');
 
+
 //wrong answers
 let missed = 0;
 
@@ -57,7 +58,7 @@ function addPhraseToDisplay(phrasePick) {
 
 addPhraseToDisplay(phrasePick);
 
-// check if a letter is in the phrase function
+// check if a letter is in the phrase
 function checkLetter(button) {
     let letters = document.querySelectorAll('.letter');
     let match = null;
@@ -69,6 +70,22 @@ function checkLetter(button) {
     }
     return match;
 }
+
+// check if game is won or lost
+function checkWin() {
+    let letters = document.querySelectorAll('.letter');
+    let correct = document.querySelectorAll('.show');
+    if (letters.length === correct.length) {
+        console.log("You Win!");
+        overlay.classList.add('win');
+        overlay.firstElementChild.textContent = 'You Win!';
+        overlay.style.display = 'flex';
+    } else if (missed > 4) {
+        overlay.classList.add('lose');
+        overlay.firstElementChild.textContent = 'You Lose!';
+        overlay.style.display = 'flex';
+    }
+}
 // listen for the on screen keyboard to be clicked
 
     qwerty.addEventListener('click', (e) => {
@@ -79,17 +96,22 @@ function checkLetter(button) {
             const match = checkLetter(e.target.textContent.toLowerCase());
             if (match === null) {
                 missed ++;
+                incorrect = hearts.parentNode;
+                incorrect.removeChild(incorrect.lastElementChild);
+                checkWin();
+            } else {
+                checkWin();
             }
         }
     });
   
 
-// check if game is won or lost
-function checkWin() {
 
-}
+
+
 
 // reset game
 function reset() {
+    
 
 }
