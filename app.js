@@ -21,16 +21,6 @@ const phrases = [
     "The Shining"
 ];
 
-// listen for game start
-start_btn.addEventListener('click', () => {
-    if (start_btn.textContent === 'Start Game') {
-        overlay.style.display = 'none';
-    } else {
-        overlay.style.display = 'none';
-    }
-});
-
-
 // retrun a random phrase from an array
 function getRandomPhrase(arr) {
     let choice = Math.floor(Math.random() * arr.length);
@@ -71,6 +61,20 @@ function checkLetter(button) {
     return match;
 }
 
+// reset game
+function reset() {
+    let resetButton = document.createElement('a');
+    resetButton.className = 'btn_reset';
+    resetButton.textContent = 'Play Again';
+    resetButton.style.color = '#fff';
+    overlay.appendChild(resetButton);
+    missed = 0;
+    phraseUL = '';
+    let phrasePick = getRandomPhrase(phrases);
+    addPhraseToDisplay(phrasePick);
+
+}
+
 // check if game is won or lost
 function checkWin() {
     let letters = document.querySelectorAll('.letter');
@@ -80,10 +84,12 @@ function checkWin() {
         overlay.classList.add('win');
         overlay.firstElementChild.textContent = 'You Win!';
         overlay.style.display = 'flex';
+        reset();
     } else if (missed > 4) {
         overlay.classList.add('lose');
         overlay.firstElementChild.textContent = 'You Lose!';
         overlay.style.display = 'flex';
+        reset();
     }
 }
 // listen for the on screen keyboard to be clicked
@@ -105,13 +111,13 @@ function checkWin() {
         }
     });
   
-
-
-
-
-
-// reset game
-function reset() {
-    
-
-}
+    // listen for game start
+start_btn.addEventListener('click', () => {
+    if (start_btn.textContent === 'Start Game') {
+        overlay.style.display = 'none';
+    } else if (start_btn.textContent === 'Play Again') {
+        overlay.style.display = 'none';
+    } else {
+        overlay.style.display = 'flex';
+    }
+});
