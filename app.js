@@ -6,7 +6,7 @@ const overlay = document.getElementById('overlay');
 const start_btn = document.querySelector('.btn_reset');
 let chosen = '';
 let scoreboard = document.getElementById('scoreboard');
-let hearts = document.querySelector('.tries');
+let hearts = document.querySelectorAll('.tries');
 
 //wrong answers
 let missed = 0;
@@ -105,6 +105,10 @@ function reset() {
         chosenLetters[i].disabled = false;
      }
 }
+
+function minusHeart() {
+  
+}
 // listen for the on screen keyboard to be clicked
 
     qwerty.addEventListener('click', (e) => {
@@ -115,8 +119,7 @@ function reset() {
             const match = checkLetter(e.target.textContent.toLowerCase());
             if (match === null) {
                 missed ++;
-                incorrect = hearts.parentNode;
-                incorrect.removeChild(incorrect.lastElementChild);
+                minusHeart();
                 checkWin();
             } else {
                 checkWin();
