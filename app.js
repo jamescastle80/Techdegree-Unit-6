@@ -13,9 +13,9 @@ let missed = 0;
 
 // phrases array
 const phrases = [
-    "As good as it gets",
-    "A few good men",
-    "Terms of endearment",
+    "As Good as it Gets",
+    "A Few Good Men",
+    "Terms of Endearment",
     "Easy Rider",
     "The Shining"
 ];
