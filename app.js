@@ -8,7 +8,6 @@ let chosen = '';
 let scoreboard = document.getElementById('scoreboard');
 let hearts = document.querySelector('.tries');
 
-
 //wrong answers
 let missed = 0;
 
@@ -20,6 +19,19 @@ const phrases = [
     "Easy Rider",
     "The Shining"
 ];
+
+// listen for game start
+start_btn.addEventListener('click', () => {
+    if (start_btn.textContent === 'Start Game') {
+        overlay.style.display = 'none';
+    } else if (start_btn.textContent === 'Play Again') {
+        overlay.style.display = 'none';
+    } else {
+        overlay.style.display = 'flex';
+      }
+    });
+
+
 
 // retrun a random phrase from an array
 function getRandomPhrase(arr) {
@@ -61,20 +73,6 @@ function checkLetter(button) {
     return match;
 }
 
-// reset game
-function reset() {
-    let resetButton = document.createElement('a');
-    resetButton.className = 'btn_reset';
-    resetButton.textContent = 'Play Again';
-    resetButton.style.color = '#fff';
-    overlay.appendChild(resetButton);
-    missed = 0;
-    phraseUL = '';
-    let phrasePick = getRandomPhrase(phrases);
-    addPhraseToDisplay(phrasePick);
-
-}
-
 // check if game is won or lost
 function checkWin() {
     let letters = document.querySelectorAll('.letter');
@@ -91,6 +89,21 @@ function checkWin() {
         overlay.style.display = 'flex';
         reset();
     }
+}
+
+// reset game
+function reset() {
+    start_btn.textContent = 'Play Again';
+    start_btn.style.color = '#fff';
+    missed = 0;
+    phraseUl.innerHTML = '';
+    let phrasePick = getRandomPhrase(phrases);
+    addPhraseToDisplay(phrasePick);
+        let chosenLetters = document.querySelectorAll('.chosen');
+        for (let i = 0; i < chosenLetters.length; i++) {
+        chosenLetters[i].classList.remove('chosen');
+        chosenLetters[i].disabled = false;
+     }
 }
 // listen for the on screen keyboard to be clicked
 
@@ -111,13 +124,3 @@ function checkWin() {
         }
     });
   
-    // listen for game start
-start_btn.addEventListener('click', () => {
-    if (start_btn.textContent === 'Start Game') {
-        overlay.style.display = 'none';
-    } else if (start_btn.textContent === 'Play Again') {
-        overlay.style.display = 'none';
-    } else {
-        overlay.style.display = 'flex';
-    }
-});
