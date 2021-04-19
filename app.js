@@ -7,6 +7,7 @@ const start_btn = document.querySelector('.btn_reset');
 let chosen = '';
 let scoreboard = document.getElementById('scoreboard');
 let hearts = document.querySelectorAll('.tries');
+let heartsOL = document.querySelector('#scoreboard ol');
 
 //wrong answers
 let missed = 0;
@@ -103,12 +104,14 @@ function reset() {
         for (let i = 0; i < chosenLetters.length; i++) {
         chosenLetters[i].classList.remove('chosen');
         chosenLetters[i].disabled = false;
+        
      }
+        for (let i = 0; i < hearts.length; i++) {
+            hearts[i].firstChild.src = "images/liveHeart.png";
+        }
 }
 
-function minusHeart() {
-  
-}
+
 // listen for the on screen keyboard to be clicked
 
     qwerty.addEventListener('click', (e) => {
@@ -119,7 +122,7 @@ function minusHeart() {
             const match = checkLetter(e.target.textContent.toLowerCase());
             if (match === null) {
                 missed ++;
-                minusHeart();
+                hearts[missed - 1].firstChild.src = "images/lostHeart.png";
                 checkWin();
             } else {
                 checkWin();
