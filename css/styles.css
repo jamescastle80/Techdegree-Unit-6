@@ -95,7 +95,8 @@ button {
 .show {
   color: #000;
   background-color: #76CE82;
-  transition: background-color 3s, color 1s;
+  transform: rotate(360deg);
+  transition: background-color 3s, color 1s, transform 2s;
 
 }
 
